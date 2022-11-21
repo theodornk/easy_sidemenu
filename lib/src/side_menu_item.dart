@@ -126,7 +126,15 @@ class _SideMenuItemState extends State<SideMenuItem> {
     if (widget.priority == currentPage) {
       return Global.style.selectedColor ?? Theme.of(context).highlightColor;
     } else if (isHovered) {
-      return Global.style.hoverColor ?? Colors.transparent;
+      return Colors.white;
+    } else {
+      return Colors.white;
+    }
+  }
+
+  Color _setBorder() {
+    if (widget.priority == currentPage) {
+      return Colors.black;
     } else {
       return Colors.transparent;
     }
@@ -164,9 +172,15 @@ class _SideMenuItemState extends State<SideMenuItem> {
           height: Global.style.itemHeight,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: _setColor(),
-            borderRadius: Global.style.itemBorderRadius,
-          ),
+              color: _setColor(),
+              borderRadius: Global.style.itemBorderRadius,
+              border: Border.all(color: _setBorder()),
+              boxShadow: [
+                BoxShadow(
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    color: Colors.grey.withOpacity(0.1))
+              ]),
           child: ValueListenableBuilder(
             valueListenable: Global.displayModeState,
             builder: (context, value, child) {
